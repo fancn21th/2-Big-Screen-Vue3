@@ -1,6 +1,7 @@
 <script setup>
+import Layer from "../../components/layer/Layer.vue";
 </script>
 
 <template>
-  <h1>Home</h1>
+  <Layer index="1">Home</Layer>
 </template>
