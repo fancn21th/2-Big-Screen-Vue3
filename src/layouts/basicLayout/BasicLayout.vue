@@ -5,12 +5,12 @@ import Layer from "../../components/layer/Layer.vue";
 <template>
   <!-- nav layer -->
   <Layer :index="1000">
-    <div :class="nav">Navigation Layer</div>
+    <div class="nav">Navigation Layer</div>
     <router-view></router-view>
   </Layer>
   <!-- background layer -->
   <Layer :index="1">
-    <div :class="background">Background</div>
+    <div class="background">Background</div>
   </Layer>
 
   <portal-target name="destination" multiple />
