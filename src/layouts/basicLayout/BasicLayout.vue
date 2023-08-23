@@ -3,5 +3,8 @@ import Layer from "../../components/layer/Layer.vue";
 </script>
 
 <template>
-  <h1>Home</h1>
+  <Layer index="1">
+    <div>Navigation Layer</div>
+    <router-view></router-view>
+  </Layer>
 </template>

@@ -6,7 +6,7 @@ defineProps({
 
 <template>
   <div class="layer">
-    {{ index }}
+    <slot></slot>
   </div>
 </template>
 

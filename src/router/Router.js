@@ -1,16 +1,32 @@
 import { createRouter, createWebHashHistory } from "vue-router";
+import BasicLayout from "../layouts/basicLayout/BasicLayout.vue";
 import Home from "../pages/home/Home.vue";
 import Foo from "../pages/foo/Foo.vue";
 
 const routes = [
-  { path: "/", component: Home },
-  { path: "/foo", component: Foo },
+  { path: "/", redirect: { name: "home" } },
+  {
+    path: "/nav/",
+    name: "nav",
+    component: BasicLayout,
+    children: [
+      {
+        path: "home",
+        name: "home",
+        component: Home,
+      },
+      {
+        path: "foo",
+        name: "foo",
+        component: Foo,
+      },
+    ],
+  },
 ];
 
 const router = createRouter({
-  // 4. 内部提供了 history 模式的实现。为了简单起见，我们在这里使用 hash 模式。
   history: createWebHashHistory(),
-  routes, // `routes: routes` 的缩写
+  routes,
 });
 
 export default router;
