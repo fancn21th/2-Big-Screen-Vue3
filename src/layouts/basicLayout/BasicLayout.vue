@@ -12,6 +12,8 @@ import Layer from "../../components/layer/Layer.vue";
   <Layer :index="1">
     <div :class="background">Background</div>
   </Layer>
+
+  <portal-target name="destination" multiple />
 </template>
 
 <style scoped>

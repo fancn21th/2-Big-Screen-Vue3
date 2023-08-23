@@ -1,15 +1,20 @@
 <script setup>
 import Layer from "../../components/layer/Layer.vue";
-import Grid from "./components/grid/Grid.vue";
+import Grid from "./components/charts/Charts.vue";
 </script>
 
 <template>
-  <!-- gridster layer -->
-  <Layer :index="100">
-    <Grid />
-  </Layer>
-  <!-- map layer -->
-  <Layer :index="10">
-    <h1>Map</h1>
-  </Layer>
+  <portal to="destination" :order="1">
+    <Layer :index="100">
+      <!-- gridster layer -->
+      <Grid />
+    </Layer>
+  </portal>
+
+  <portal to="destination" :order="2">
+    <Layer :index="10">
+      <!-- map layer -->
+      <h1>Map</h1>
+    </Layer>
+  </portal>
 </template>
