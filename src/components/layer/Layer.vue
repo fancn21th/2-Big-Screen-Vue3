@@ -1,11 +1,15 @@
 <script setup>
 defineProps({
   index: Number,
+  backgroundColor: String,
 });
 </script>
 
 <template>
-  <div class="layer">
+  <div
+    class="layer"
+    :style="{ zIndex: index, backgroundColor: backgroundColor }"
+  >
     <slot></slot>
   </div>
 </template>
@@ -17,7 +21,6 @@ defineProps({
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: red;
   border: 1px solid black;
 }
 </style>
