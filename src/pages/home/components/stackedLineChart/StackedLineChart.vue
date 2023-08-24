@@ -7,9 +7,9 @@ const chartRef = ref(null);
 const renderChart = async () => {
   await nextTick();
 
-  const myChart = echarts.init(chartRef.value);
+  const chart = echarts.init(chartRef.value);
 
-  console.log({ myChart, clientHeight: chartRef.value.clientHeight });
+  console.log({ chart, clientHeight: chartRef.value.clientHeight });
 
   const option = {
     title: {
@@ -73,7 +73,8 @@ const renderChart = async () => {
       },
     ],
   };
-  myChart.setOption(option);
+
+  chart.setOption(option);
 };
 
 watchEffect(() => {
