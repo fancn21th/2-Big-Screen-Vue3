@@ -1,6 +1,7 @@
 <script setup>
 import Layer from "../../components/layer/Layer.vue";
 import Charts from "./components/charts/Charts.vue";
+import Map from "./components/map/Map.vue";
 </script>
 
 <template>
@@ -14,7 +15,7 @@ import Charts from "./components/charts/Charts.vue";
   <portal to="destination" :order="2">
     <!-- map layer -->
     <Layer :index="10">
-      <h1>Map</h1>
+      <Map />
     </Layer>
   </portal>
 </template>

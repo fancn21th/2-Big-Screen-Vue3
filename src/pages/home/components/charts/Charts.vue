@@ -49,7 +49,6 @@ const resizable = true;
 
 <style scoped>
 .vue-grid-layout {
-  background: #eee;
 }
 
 .vue-grid-item:not(.vue-grid-placeholder) {
@@ -61,7 +60,6 @@ const resizable = true;
 }
 
 .vue-grid-item .static {
-  background: #cce;
 }
 
 .vue-grid-item .text {

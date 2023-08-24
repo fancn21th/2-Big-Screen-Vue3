@@ -4,7 +4,7 @@ import { ref, watch } from "vue";
 
 const chartRef = ref(null);
 
-const renderChart = async () => {
+const renderChart = () => {
   const chart = echarts.init(chartRef.value);
 
   const option = {
