@@ -16,7 +16,7 @@ const initial_layout = Array.from({ length: 32 }, (_, index) => {
   };
 });
 
-const layout = ref(initial_layout);
+const layout = ref(initial_layout.filter((item) => item.x > 4));
 
 const draggable = true;
 const resizable = true;

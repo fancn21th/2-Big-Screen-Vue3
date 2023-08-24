@@ -1,15 +1,11 @@
 <script setup>
 import * as echarts from "echarts";
-import { onMounted, ref, watchEffect, nextTick } from "vue";
+import { ref, watch } from "vue";
 
 const chartRef = ref(null);
 
 const renderChart = async () => {
-  await nextTick();
-
   const chart = echarts.init(chartRef.value);
-
-  console.log({ chart, clientHeight: chartRef.value.clientHeight });
 
   const option = {
     title: {
@@ -77,9 +73,11 @@ const renderChart = async () => {
   chart.setOption(option);
 };
 
-watchEffect(() => {
-  if (chartRef.value && chartRef.value.clientHeight > 0) {
-    renderChart();
+watch(chartRef, (newVal, oldVal) => {
+  if (newVal && newVal.clientHeight > 0) {
+    setTimeout(() => {
+      renderChart();
+    }, 0);
   }
 });
 </script>
@@ -92,6 +90,5 @@ watchEffect(() => {
 .chart-container {
   width: 100%;
   height: 100%;
-  background-color: red;
 }
 </style>
