@@ -23,7 +23,6 @@ const resizable = true;
 </script>
 
 <template>
-  <StackedLineChart />
   <GridLayout
     v-model:layout="layout"
     :col-num="colsNumber"
@@ -43,6 +42,7 @@ const resizable = true;
       :h="item.h"
       :i="item.i"
     >
+      <StackedLineChart />
     </GridItem>
   </GridLayout>
 </template>
