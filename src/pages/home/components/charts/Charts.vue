@@ -3,6 +3,7 @@ import { GridLayout, GridItem } from "vue3-grid-layout-next";
 import { ref } from "vue";
 import { config } from "../../../../configs/chartsConfig";
 const { colsNumber, rowHeight } = config;
+import StackedLineChart from "../stackedLineChart/StackedLineChart.vue";
 
 const initial_layout = Array.from({ length: 32 }, (_, index) => {
   return {
@@ -22,6 +23,7 @@ const resizable = true;
 </script>
 
 <template>
+  <StackedLineChart />
   <GridLayout
     v-model:layout="layout"
     :col-num="colsNumber"
@@ -41,7 +43,6 @@ const resizable = true;
       :h="item.h"
       :i="item.i"
     >
-      {{ item.i }}
     </GridItem>
   </GridLayout>
 </template>
@@ -52,8 +53,7 @@ const resizable = true;
 }
 
 .vue-grid-item:not(.vue-grid-placeholder) {
-  background: #ccc;
-  border: 1px solid black;
+  border: 1px dashed #ccc;
 }
 
 .vue-grid-item .resizing {
