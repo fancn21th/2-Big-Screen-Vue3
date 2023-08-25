@@ -29,15 +29,18 @@ onMounted(() => {
     (key) => chartsRef.value[key].chartRef
   );
 
-  console.log(charts);
-
   const timeline = gsap.timeline({});
 
-  charts.forEach((chart) => {
-    timeline.from(chart, {
-      x: "300%",
-      ease: "ease.inOut",
-    });
+  // https://greensock.com/docs/v3/Staggers
+  // you can refer to the above link for more information about stagger
+  timeline.from(charts, {
+    x: "400%",
+    ease: "ease.inOut",
+    stagger: {
+      grid: [7, 15],
+      from: "end",
+      amount: 1.5,
+    },
   });
 });
 </script>
