@@ -20,5 +20,6 @@ defineProps({
   height: 100%;
   border: 1px solid black;
   background-color: transparent;
+  overflow: hidden; /* prevent child from overflowing */
 }
 </style>

@@ -1,6 +1,7 @@
 <script setup>
+import gsap from "gsap";
 import { GridLayout, GridItem } from "vue3-grid-layout-next";
-import { ref } from "vue";
+import { ref, unref, onMounted } from "vue";
 import { config } from "../../../../configs/chartsConfig";
 const { colsNumber, rowHeight } = config;
 import StackedLineChart from "../stackedLineChart/StackedLineChart.vue";
@@ -20,6 +21,25 @@ const layout = ref(initial_layout.filter((item) => item.x > 4));
 
 const draggable = true;
 const resizable = true;
+
+const chartsRef = ref([]);
+
+onMounted(() => {
+  const charts = Object.keys(chartsRef.value).map(
+    (key) => chartsRef.value[key].chartRef
+  );
+
+  console.log(charts);
+
+  const timeline = gsap.timeline({});
+
+  charts.forEach((chart) => {
+    timeline.from(chart, {
+      x: "300%",
+      ease: "ease.inOut",
+    });
+  });
+});
 </script>
 
 <template>
@@ -42,7 +62,7 @@ const resizable = true;
       :h="item.h"
       :i="item.i"
     >
-      <StackedLineChart />
+      <StackedLineChart ref="chartsRef" />
     </GridItem>
   </GridLayout>
 </template>

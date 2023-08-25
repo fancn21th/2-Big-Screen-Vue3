@@ -80,6 +80,10 @@ watch(chartRef, (newVal, oldVal) => {
     }, 0);
   }
 });
+
+defineExpose({
+  chartRef,
+});
 </script>
 
 <template>
