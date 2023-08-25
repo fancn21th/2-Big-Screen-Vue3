@@ -30,7 +30,7 @@ const resizable = true;
     :is-draggable="draggable"
     :is-resizable="resizable"
     :vertical-compact="true"
-    :use-css-transforms="true"
+    :use-css-transforms="false"
   >
     <GridItem
       v-for="item in layout"
