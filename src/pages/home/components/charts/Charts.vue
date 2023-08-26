@@ -35,11 +35,12 @@ onMounted(() => {
   // you can refer to the above link for more information about stagger
   timeline.from(charts, {
     x: "400%",
-    ease: "ease.inOut",
     stagger: {
-      grid: [7, 15],
-      from: "end",
-      amount: 1.5,
+      grid: [4, 3],
+      from: "random",
+      // each: 0.1,
+      amount: 1,
+      ease: "ease.inOut",
     },
   });
 });
