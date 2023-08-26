@@ -1,8 +1,9 @@
 <script setup>
+import gsap from "gsap";
 import * as echarts from "echarts";
 import "echarts/extension/bmap/bmap";
 
-import { ref, watch } from "vue";
+import { ref, watch, onMounted } from "vue";
 import data from "./data";
 
 const chartRef = ref(null);
@@ -153,6 +154,16 @@ watch(chartRef, (newVal, oldVal) => {
       renderChart();
     }, 0);
   }
+});
+
+onMounted(() => {
+  const timeline = gsap.timeline({});
+
+  timeline.from(chartRef.value, {
+    opacity: 0,
+    duration: 3,
+    ease: "ease.inOut",
+  });
 });
 </script>
 
