@@ -146,7 +146,6 @@ const renderChart = async () => {
     ],
   };
   chart.setOption(option);
-  chart.setOption(option);
 };
 
 watch(chartRef, (newVal, oldVal) => {
