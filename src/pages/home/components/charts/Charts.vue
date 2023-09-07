@@ -1,11 +1,12 @@
 <script setup>
-import gsap from "gsap";
-import { GridLayout, GridItem } from "vue3-grid-layout-next";
 import { ref, onMounted } from "vue";
+import gsap from "gsap";
+import { onBeforeRouteLeave } from "vue-router";
+import { GridLayout, GridItem } from "vue3-grid-layout-next";
 import { config } from "../../../../configs/chartsConfig";
 const { colsNumber, rowHeight } = config;
 import StackedLineChart from "../../../../components/stackedLineChart/StackedLineChart.vue";
-import NightingaleChart from "../../../../components/nightingaleChart/NightingaleChart.vue";
+// import NightingaleChart from "../../../../components/nightingaleChart/NightingaleChart.vue";
 
 // layout config for vue3-grid-layout-next
 const initial_layout = Array.from({ length: 32 }, (_, index) => {
@@ -26,13 +27,13 @@ const resizable = true;
 
 const chartsRef = ref([]);
 
+const timeline = gsap.timeline({});
+
 onMounted(() => {
   // turn the chartsRef into an array of charts
   const charts = Object.keys(chartsRef.value).map(
     (key) => chartsRef.value[key].chartRef
   );
-
-  const timeline = gsap.timeline({});
 
   // https://greensock.com/docs/v3/Staggers
   // you can refer to the above link for more information about stagger
@@ -46,6 +47,18 @@ onMounted(() => {
       ease: "ease.inOut",
     },
   });
+});
+
+// TODO: duplicate
+onBeforeRouteLeave(async (to, from) => {
+  const reversePromise = new Promise((resolve) => {
+    timeline.reverse();
+    timeline.eventCallback("onReverseComplete", () => {
+      resolve(true);
+    });
+  });
+  const result = await reversePromise;
+  return result;
 });
 </script>
 
