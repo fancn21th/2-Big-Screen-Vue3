@@ -146,7 +146,6 @@ const renderChart = async () => {
     ],
   };
   chart.setOption(option);
-  chart.setOption(option);
 };
 
 watch(chartRef, (newVal, oldVal) => {
@@ -164,6 +163,7 @@ onMounted(() => {
     opacity: 0,
     duration: 1,
     ease: "ease.inOut",
+    delay: 0.5, // TODO: hard coded delay to be removed, better orchestrate the animation at parent level
   });
 });
 
