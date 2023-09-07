@@ -1,6 +1,7 @@
 <script setup>
 import gsap from "gsap";
 import * as echarts from "echarts";
+import { onBeforeRouteLeave } from "vue-router";
 import "echarts/extension/bmap/bmap";
 
 import { ref, watch, onMounted } from "vue";
@@ -156,18 +157,30 @@ watch(chartRef, (newVal, oldVal) => {
   }
 });
 
-onMounted(() => {
-  const timeline = gsap.timeline({});
+const timeline = gsap.timeline({});
 
+onMounted(() => {
   timeline.from(chartRef.value, {
     opacity: 0,
-    duration: 3,
+    duration: 1,
     ease: "ease.inOut",
   });
 });
+
+// TODO: duplicate
+onBeforeRouteLeave(async (to, from) => {
+  const reversePromise = new Promise((resolve) => {
+    timeline.reverse();
+    timeline.eventCallback("onReverseComplete", () => {
+      resolve(true);
+    });
+  });
+  const result = await reversePromise;
+  return result;
+});
 </script>
 
-<template >
+<template>
   <div class="chart-container" ref="chartRef"></div>
 </template>
 

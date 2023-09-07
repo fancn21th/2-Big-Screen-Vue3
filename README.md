@@ -25,4 +25,7 @@
 ## References
 
 - [vue3-grid-layout-next](https://jbaysolutions.github.io/vue-grid-layout/guide/usage.html)
+
   - `caution !` this doc is for vue 2 version since the vue 3 version is just another fork for vue 3 compatibility, no doc created specifically for vue 3 version
+
+- [gsap](https://greensock.com/docs/v3)
