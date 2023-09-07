@@ -22,8 +22,15 @@ onMounted(() => {
 
 <template>
   <div class="container">
-    <div class="header bg" ref="header">Navigation Layer / Header</div>
-    <div class="nav bg" ref="nav">Navigation Layer / Left Navbar</div>
+    <div class="header bg" ref="header">Logo | Header</div>
+    <div class="nav bg" ref="nav">
+      <ul>
+        <li><router-link to="/">Home Page</router-link></li>
+        <li>
+          <router-link to="/nav/foo">Foo Page</router-link>
+        </li>
+      </ul>
+    </div>
   </div>
 </template>
 

@@ -4,7 +4,7 @@ import { GridLayout, GridItem } from "vue3-grid-layout-next";
 import { ref, onMounted } from "vue";
 import { config } from "../../../../configs/chartsConfig";
 const { colsNumber, rowHeight } = config;
-import StackedLineChart from "../../../../components/stackedLineChart/StackedLineChart.vue";
+// import StackedLineChart from "../../../../components/stackedLineChart/StackedLineChart.vue";
 import NightingaleChart from "../../../../components/nightingaleChart/NightingaleChart.vue";
 
 // layout config for vue3-grid-layout-next
@@ -69,7 +69,7 @@ onMounted(() => {
       :h="item.h"
       :i="item.i"
     >
-      <StackedLineChart ref="chartsRef" />
+      <NightingaleChart ref="chartsRef" />
     </GridItem>
   </GridLayout>
 </template>
