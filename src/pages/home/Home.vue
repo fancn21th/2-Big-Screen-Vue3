@@ -5,17 +5,13 @@ import Map from "./components/map/Map.vue";
 </script>
 
 <template>
-  <portal to="destination" :order="1">
+  <Layer :index="100">
     <!-- charts layer -->
-    <Layer :index="100">
-      <Charts />
-    </Layer>
-  </portal>
+    <Charts />
+  </Layer>
 
-  <portal to="destination" :order="2">
+  <Layer :index="10">
     <!-- map layer -->
-    <Layer :index="10">
-      <Map />
-    </Layer>
-  </portal>
+    <Map />
+  </Layer>
 </template>

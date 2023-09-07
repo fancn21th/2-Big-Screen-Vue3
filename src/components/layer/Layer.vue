@@ -6,9 +6,11 @@ defineProps({
 </script>
 
 <template>
-  <div class="layer" :style="{ zIndex: index }">
-    <slot></slot>
-  </div>
+  <Teleport to="#app">
+    <div class="layer" :style="{ zIndex: index }">
+      <slot></slot>
+    </div>
+  </Teleport>
 </template>
 
 <style scoped>
