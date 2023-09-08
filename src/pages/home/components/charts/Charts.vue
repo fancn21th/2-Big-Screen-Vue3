@@ -1,13 +1,10 @@
 <script setup>
-import { ref, onMounted } from "vue";
-import { onBeforeRouteLeave } from "vue-router";
+import { ref } from "vue";
 import { GridLayout, GridItem } from "vue3-grid-layout-next";
 import { config } from "../../../../configs/chartsConfig";
 const { colsNumber, rowHeight } = config;
 import StackedLineChart from "../../../../components/stackedLineChart/StackedLineChart.vue";
-import useStagger from "../../../../composables/useStagger";
 
-// layout config for vue3-grid-layout-next start
 const initial_layout = Array.from({ length: 32 }, (_, index) => {
   return {
     x: index % 8,
@@ -23,19 +20,6 @@ const layout = ref(initial_layout.filter((item) => item.x > 4));
 
 const draggable = true;
 const resizable = true;
-// layout config for vue3-grid-layout-next end
-
-const { run, undo } = useStagger();
-
-onMounted(() => {
-  run();
-});
-
-// TODO: duplicate
-onBeforeRouteLeave(async (to, from) => {
-  const result = await undo();
-  return result;
-});
 </script>
 
 <template>
