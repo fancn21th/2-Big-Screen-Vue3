@@ -1,10 +1,10 @@
 import gsap from "gsap";
+import { onBeforeRouteLeave } from "vue-router";
 import { unref } from "vue";
 
 // shared / global state
 let master;
-
-const elements = {};
+let elements = {};
 
 const register = (element, timelineName, option) => {
   const domElement = unref(element);
@@ -66,6 +66,11 @@ const undo = () => {
 };
 
 export default function useStagger(element, options) {
+  onBeforeRouteLeave(async (to, from) => {
+    const result = await undo();
+    return result;
+  });
+
   return {
     register,
     run,
