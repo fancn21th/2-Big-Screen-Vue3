@@ -1,5 +1,13 @@
 # Big Screen General Solution All in One
 
+## Philosophy
+
+- Do not encapsulate component unless it repeats itself
+
+- Component sits as close as possible to the place where it is used
+
+  - e.g. `src/components/Nav.vue` is used in `src/App.vue`, so `Nav.vue` is placed in `src/components` folder
+
 ## Features
 
 - Layering
