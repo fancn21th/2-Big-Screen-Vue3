@@ -1,11 +1,12 @@
 <script setup>
-import gsap from "gsap";
 import * as echarts from "echarts";
-import { onBeforeRouteLeave } from "vue-router";
-import "echarts/extension/bmap/bmap";
-
 import { ref, watch, onMounted } from "vue";
+import "echarts/extension/bmap/bmap";
 import data from "./data";
+
+import useGlobalStagger from "../../../../composables/useGlobalStagger";
+
+const { register } = useGlobalStagger();
 
 const chartRef = ref(null);
 
@@ -148,35 +149,21 @@ const renderChart = async () => {
   chart.setOption(option);
 };
 
+onMounted(() => {
+  // register the dom that needs to be animated
+  register(chartRef, "map", {
+    opacity: 0,
+    duration: 1,
+    ease: "ease.inOut",
+  });
+});
+
 watch(chartRef, (newVal, oldVal) => {
   if (newVal && newVal.clientHeight > 0) {
     setTimeout(() => {
       renderChart();
     }, 0);
   }
-});
-
-const timeline = gsap.timeline({});
-
-onMounted(() => {
-  timeline.from(chartRef.value, {
-    opacity: 0,
-    duration: 1,
-    ease: "ease.inOut",
-    delay: 0.5, // TODO: hard coded delay to be removed, better orchestrate the animation at parent level
-  });
-});
-
-// TODO: duplicate
-onBeforeRouteLeave(async (to, from) => {
-  const reversePromise = new Promise((resolve) => {
-    timeline.reverse();
-    timeline.eventCallback("onReverseComplete", () => {
-      resolve(true);
-    });
-  });
-  const result = await reversePromise;
-  return result;
 });
 </script>
 

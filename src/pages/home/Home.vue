@@ -1,15 +1,21 @@
 <script setup>
 import { onMounted } from "vue";
+import { onBeforeRouteLeave } from "vue-router";
 import Layer from "../../components/layer/Layer.vue";
 import Charts from "./components/charts/Charts.vue";
 import Map from "./components/map/Map.vue";
 
 import useGlobalStagger from "../../composables/useGlobalStagger";
 
-const { run } = useGlobalStagger();
+const { run, undo } = useGlobalStagger();
 
 onMounted(() => {
   run();
+});
+
+onBeforeRouteLeave(async (to, from) => {
+  const result = await undo();
+  return result;
 });
 </script>
 

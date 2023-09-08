@@ -1,18 +1,33 @@
 <script setup>
 import * as echarts from "echarts";
-import { ref, watch } from "vue";
+import { ref, watch, onMounted } from "vue";
+import useGlobalStagger from "../../composables/useGlobalStagger";
+
+const { register } = useGlobalStagger();
 
 const chartRef = ref(null);
 
 const renderChart = () => {
   const chart = echarts.init(chartRef.value);
 
-  const option = {
-    // fill in your chart options here
-  }
+  // your chart options here
+  const option = {};
 
   chart.setOption(option);
 };
+
+onMounted(() => {
+  // register the dom that needs to be animated
+  register(chartRef, "XXX", {
+    // x: "400%",
+    // stagger: {
+    //   grid: [4, 3],
+    //   from: "random",
+    //   amount: 1,
+    //   ease: "ease.inOut",
+    // },
+  });
+});
 
 watch(chartRef, (newVal, oldVal) => {
   if (newVal && newVal.clientHeight > 0) {
@@ -20,10 +35,6 @@ watch(chartRef, (newVal, oldVal) => {
       renderChart();
     }, 0);
   }
-});
-
-defineExpose({
-  chartRef,
 });
 </script>
 
