@@ -1,6 +1,9 @@
 <script setup>
 import * as echarts from "echarts";
 import { ref, watch } from "vue";
+import useStagger from "../../composables/useStagger";
+
+const { register } = useStagger();
 
 const chartRef = ref(null);
 
@@ -77,12 +80,10 @@ watch(chartRef, (newVal, oldVal) => {
   if (newVal && newVal.clientHeight > 0) {
     setTimeout(() => {
       renderChart();
+      // register the dom that needs to be animated
+      register(chartRef);
     }, 0);
   }
-});
-
-defineExpose({
-  chartRef,
 });
 </script>
 

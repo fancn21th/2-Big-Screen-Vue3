@@ -1,14 +1,13 @@
 <script setup>
 import { ref, onMounted } from "vue";
-import gsap from "gsap";
 import { onBeforeRouteLeave } from "vue-router";
 import { GridLayout, GridItem } from "vue3-grid-layout-next";
 import { config } from "../../../../configs/chartsConfig";
 const { colsNumber, rowHeight } = config;
 import StackedLineChart from "../../../../components/stackedLineChart/StackedLineChart.vue";
-// import NightingaleChart from "../../../../components/nightingaleChart/NightingaleChart.vue";
+import useStagger from "../../../../composables/useStagger";
 
-// layout config for vue3-grid-layout-next
+// layout config for vue3-grid-layout-next start
 const initial_layout = Array.from({ length: 32 }, (_, index) => {
   return {
     x: index % 8,
@@ -24,40 +23,17 @@ const layout = ref(initial_layout.filter((item) => item.x > 4));
 
 const draggable = true;
 const resizable = true;
+// layout config for vue3-grid-layout-next end
 
-const chartsRef = ref([]);
-
-const timeline = gsap.timeline({});
+const { run, undo } = useStagger();
 
 onMounted(() => {
-  // turn the chartsRef into an array of charts
-  const charts = Object.keys(chartsRef.value).map(
-    (key) => chartsRef.value[key].chartRef
-  );
-
-  // https://greensock.com/docs/v3/Staggers
-  // you can refer to the above link for more information about stagger
-  timeline.from(charts, {
-    x: "400%",
-    stagger: {
-      grid: [4, 3],
-      from: "random",
-      // each: 0.1,
-      amount: 1,
-      ease: "ease.inOut",
-    },
-  });
+  run();
 });
 
 // TODO: duplicate
 onBeforeRouteLeave(async (to, from) => {
-  const reversePromise = new Promise((resolve) => {
-    timeline.reverse();
-    timeline.eventCallback("onReverseComplete", () => {
-      resolve(true);
-    });
-  });
-  const result = await reversePromise;
+  const result = await undo();
   return result;
 });
 </script>
@@ -82,7 +58,7 @@ onBeforeRouteLeave(async (to, from) => {
       :h="item.h"
       :i="item.i"
     >
-      <StackedLineChart ref="chartsRef" />
+      <StackedLineChart />
     </GridItem>
   </GridLayout>
 </template>
