@@ -64,7 +64,7 @@ const undo = () => {
   });
 };
 
-export default function useStagger(element, options) {
+export default function useGlobalStagger(element, options) {
   return {
     register,
     run,
