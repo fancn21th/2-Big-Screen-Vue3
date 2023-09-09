@@ -1,6 +1,9 @@
 <script setup>
 import * as echarts from "echarts";
-import { ref, watch } from "vue";
+import { ref, watch, onMounted } from "vue";
+import useGlobalStagger from "../../composables/useGlobalStagger";
+
+const { register } = useGlobalStagger();
 
 const chartRef = ref(null);
 
@@ -10,7 +13,7 @@ const renderChart = () => {
   const option = {
     // fill in your chart options here
     legend: {
-      top: 'bottom'
+      top: "bottom",
     },
     toolbox: {
       show: true,
@@ -18,35 +21,48 @@ const renderChart = () => {
         mark: { show: true },
         dataView: { show: true, readOnly: false },
         restore: { show: true },
-        saveAsImage: { show: true }
-      }
+        saveAsImage: { show: true },
+      },
     },
     series: [
       {
-        name: 'Nightingale Chart',
-        type: 'pie',
+        name: "Nightingale Chart",
+        type: "pie",
         radius: [50, 250],
-        center: ['50%', '50%'],
-        roseType: 'area',
+        center: ["50%", "50%"],
+        roseType: "area",
         itemStyle: {
-          borderRadius: 8
+          borderRadius: 8,
         },
         data: [
-          { value: 40, name: 'rose 1' },
-          { value: 38, name: 'rose 2' },
-          { value: 32, name: 'rose 3' },
-          { value: 30, name: 'rose 4' },
-          { value: 28, name: 'rose 5' },
-          { value: 26, name: 'rose 6' },
-          { value: 22, name: 'rose 7' },
-          { value: 18, name: 'rose 8' }
-        ]
-      }
-    ]
-  }
+          { value: 40, name: "rose 1" },
+          { value: 38, name: "rose 2" },
+          { value: 32, name: "rose 3" },
+          { value: 30, name: "rose 4" },
+          { value: 28, name: "rose 5" },
+          { value: 26, name: "rose 6" },
+          { value: 22, name: "rose 7" },
+          { value: 18, name: "rose 8" },
+        ],
+      },
+    ],
+  };
 
   chart.setOption(option);
 };
+
+onMounted(() => {
+  // register the dom that needs to be animated
+  register(chartRef, "chart", {
+    x: "400%",
+    stagger: {
+      grid: [4, 3],
+      from: "random",
+      amount: 1,
+      ease: "ease.inOut",
+    },
+  });
+});
 
 watch(chartRef, (newVal, oldVal) => {
   if (newVal && newVal.clientHeight > 0) {
@@ -54,10 +70,6 @@ watch(chartRef, (newVal, oldVal) => {
       renderChart();
     }, 0);
   }
-});
-
-defineExpose({
-  chartRef,
 });
 </script>
 

@@ -9,8 +9,16 @@ import Nav from "./components/nav/Nav.vue";
     <Nav />
     <router-view></router-view>
   </Layer>
-  <Layer :index="1"> <!-- background layer --></Layer>
+  <Layer :index="1">
+    <!-- background layer -->
+    <div class="background"></div>
+  </Layer>
 </template>
 
 <style scoped>
+.background {
+  width: 100%;
+  height: 100%;
+  background: #efefef url("../../assets/bg-2.jpg");
+}
 </style>
