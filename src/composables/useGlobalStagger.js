@@ -45,9 +45,8 @@ const clear = () => {
 };
 
 const run = () => {
-  const _elements = elements;
   const interval = setInterval(() => {
-    if (Object.keys(_elements).length === 2) {
+    if (Object.keys(elements).length === 2) {
       animate();
       clearInterval(interval);
     }
