@@ -46,6 +46,9 @@ const clear = () => {
 
 const run = () => {
   const interval = setInterval(() => {
+    // TODO: the condition when to run the animation is actually more complicated than this
+    // for example, it is more like an scenario that when a teacher deciding when to start the speech.
+    // it is either when all of students are present or when certain time is reached, both conditions are acceptable.
     if (Object.keys(elements).length === 2) {
       animate();
       clearInterval(interval);
