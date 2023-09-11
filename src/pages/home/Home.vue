@@ -4,6 +4,7 @@ import { onBeforeRouteLeave } from "vue-router";
 import Layer from "../../components/layer/Layer.vue";
 import Charts from "./components/charts/Charts.vue";
 import Map from "./components/map/Map.vue";
+import Filter from "./components/filter/Filter.vue";
 
 import useGlobalStagger from "../../composables/useGlobalStagger";
 
@@ -23,6 +24,11 @@ onBeforeRouteLeave(async (to, from) => {
   <Layer :index="100">
     <!-- charts layer -->
     <Charts />
+  </Layer>
+
+  <Layer :index="101">
+    <!-- charts layer filter panel -->
+    <Filter />
   </Layer>
 
   <Layer :index="10">

@@ -4,9 +4,10 @@ import Nav from "./components/nav/Nav.vue";
 </script>
 
 <template>
-  <Layer :index="1000">
+  <Layer :index="1000" :fullscreen="false">
     <!-- nav layer -->
     <Nav />
+    <!-- router-view is placeholder for nested route -->
     <router-view></router-view>
   </Layer>
   <Layer :index="1">
