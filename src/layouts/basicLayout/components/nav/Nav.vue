@@ -37,9 +37,9 @@ const change = (e) => {
       <div>
         <label for="global-year">年份:</label>
         <select name="global-year" :value="global.year" @change="change">
-          <option value="2021">2021年</option>
-          <option value="2022">2022年</option>
-          <option value="2023">2023年</option>
+          <option value="2021年">2021年</option>
+          <option value="2022年">2022年</option>
+          <option value="2023年">2023年</option>
         </select>
       </div>
     </div>

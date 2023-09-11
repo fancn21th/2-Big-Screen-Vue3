@@ -8,7 +8,7 @@ export const useFilterStore = defineStore({
   state: () => ({
     // categorized by module
     global: {
-      year: 2021,
+      year: "2021年",
     },
     home: {
       category: "华中区域",
