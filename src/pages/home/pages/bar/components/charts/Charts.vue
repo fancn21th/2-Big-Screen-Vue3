@@ -1,9 +1,9 @@
 <script setup>
 import { ref } from "vue";
 import { GridLayout, GridItem } from "vue3-grid-layout-next";
-import { config } from "../../../../configs/chartsConfig";
+import { config } from "@/configs/chartsConfig";
 const { colsNumber, rowHeight } = config;
-import StackedLineChart from "../../../../components/stackedLineChart/StackedLineChart.vue";
+import StackedLineChart from "@/components/stackedLineChart/StackedLineChart.vue";
 
 const initial_layout = Array.from({ length: 32 }, (_, index) => {
   return {

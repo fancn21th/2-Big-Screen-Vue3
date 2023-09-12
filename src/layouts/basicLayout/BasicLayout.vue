@@ -1,5 +1,5 @@
 <script setup>
-import Layer from "../../components/layer/Layer.vue";
+import Layer from "@/components/layer/Layer.vue";
 import Nav from "./components/nav/Nav.vue";
 </script>
 
