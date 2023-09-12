@@ -1,9 +1,8 @@
 <script setup>
 import * as echarts from "echarts";
 import { shallowRef, watch, onMounted } from "vue";
-import { useQuery } from "@tanstack/vue-query";
 import useGlobalStagger from "../../composables/useGlobalStagger";
-
+import { useStackLineChartData } from "./useStackLineChartData";
 /**
  *  A TodoList for a single chart component
  *
@@ -110,10 +109,7 @@ watch(chartRef, (newVal, oldVal) => {
 });
 
 // Fetch Data
-// const { isLoading, isError, data, error } = useQuery({
-//   queryKey: ["stackedlinechart"],
-//   queryFn: getTodos,
-// });
+const { isLoading, isError, isFetching, data, error } = useStackLineChartData();
 </script>
 
 <template>

@@ -5,11 +5,12 @@ import Foo from "@/pages/foo/Foo.vue";
 import Bar from "@/pages/home/pages/bar/Bar.vue";
 
 const routes = [
-  { path: "/", redirect: { name: "home" } },
+  { path: "/", redirect: { name: "nav" } },
   {
     path: "/nav/",
     name: "nav",
     component: BasicLayout,
+    redirect: { name: "home" },
     children: [
       {
         path: "home",
