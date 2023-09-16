@@ -1,10 +1,23 @@
 <script setup>
 import { ref } from "vue";
+import { vElementSize } from "@vueuse/components";
 import { GridLayout, GridItem } from "vue3-grid-layout-next";
 import { config } from "@/configs/chartsConfig";
-const { colsNumber, rowHeight } = config;
+const { colsNumber, getRowHeight } = config;
 import StackedLineChart from "@/components/stackedLineChart/StackedLineChart.vue";
 
+// calculation for grid layout height by depending on the height of the container
+// the height of the grid layout is determined by rowHeight
+const rowHeight = ref(0);
+
+function onResize({ width, height }) {
+  if (height > 0) {
+    console.log("onResize", width, height);
+    rowHeight.value = getRowHeight(height);
+  }
+}
+
+// grid layout options
 const initial_layout = Array.from({ length: 32 }, (_, index) => {
   return {
     x: index % 8,
@@ -23,31 +36,43 @@ const resizable = true;
 </script>
 
 <template>
-  <GridLayout
-    v-model:layout="layout"
-    :col-num="colsNumber"
-    :row-height="rowHeight"
-    :is-draggable="draggable"
-    :is-resizable="resizable"
-    :vertical-compact="true"
-    :use-css-transforms="false"
-  >
-    <GridItem
-      v-for="item in layout"
-      :key="item.i"
-      :static="item.static"
-      :x="item.x"
-      :y="item.y"
-      :w="item.w"
-      :h="item.h"
-      :i="item.i"
+  <!-- this container is given for calculation of height of the grid layout -->
+  <div class="container" v-element-size="onResize">
+    <!-- only if rowHeight is greater than 0 -->
+    <GridLayout
+      v-if="rowHeight > 0"
+      v-model:layout="layout"
+      :col-num="colsNumber"
+      :row-height="rowHeight"
+      :is-draggable="draggable"
+      :is-resizable="resizable"
+      :vertical-compact="true"
+      :use-css-transforms="false"
     >
-      <StackedLineChart />
-    </GridItem>
-  </GridLayout>
+      <GridItem
+        v-for="item in layout"
+        :key="item.i"
+        :static="item.static"
+        :x="item.x"
+        :y="item.y"
+        :w="item.w"
+        :h="item.h"
+        :i="item.i"
+      >
+        <StackedLineChart />
+      </GridItem>
+    </GridLayout>
+  </div>
 </template>
 
 <style scoped>
+.container {
+  width: 100%;
+  height: 100%;
+  /* avoid overlapping with header */
+  padding-top: 100px;
+}
+
 .vue-grid-layout {
 }
 
