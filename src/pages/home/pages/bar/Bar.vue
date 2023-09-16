@@ -20,7 +20,7 @@ onBeforeRouteLeave(async (to, from) => {
 </script>
 
 <template>
-  <Layer :index="100">
+  <Layer :index="100" :trim="{ top: '100px' }">
     <!-- charts layer -->
     <Charts />
   </Layer>
