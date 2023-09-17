@@ -60,6 +60,8 @@
 
   - `caution !` this doc is for vue 2 version since the vue 3 version is just another fork for vue 3 compatibility, no doc created specifically for vue 3 version and most of api should be compatible
 
+  - you better read this [API in sourcecode](https://github.com/xhlife/vue3-grid-layout/blob/master/src/components/Grid/GridLayout.vue) as API reference
+
 - [gsap](https://greensock.com/docs/v3)
 
 - [tanstack query](https://tanstack.com/query/v4/docs/vue/quick-start)
