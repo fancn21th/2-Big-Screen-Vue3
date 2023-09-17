@@ -1,7 +1,7 @@
 <script setup>
 import * as echarts from "echarts";
 import { shallowRef, watch, onMounted } from "vue";
-import useGlobalStagger from "../../composables/useGlobalStagger";
+import useGlobalStagger from "@/composables/useGlobalStagger";
 
 const { register } = useGlobalStagger();
 
