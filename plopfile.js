@@ -1,8 +1,7 @@
 import fuzzyPath from "inquirer-fuzzy-path";
 
 export default function (plop) {
-  // register more advanced prompt
-  // refer to https://github.com/adelsz/inquirer-fuzzy-path
+  // fuzzypath refer to https://github.com/adelsz/inquirer-fuzzy-path
   plop.setPrompt("fuzzypath", fuzzyPath);
 
   // controller generator
@@ -30,12 +29,22 @@ export default function (plop) {
         rootPath: "src/pages/",
       },
     ],
-    actions: [
-      {
-        type: "add",
-        path: "{{path}}/{{name}}.vue",
-        templateFile: "src/examples/{{type}}/{{type}}.vue.hbs",
-      },
-    ],
+    // actions refer to  https://plopjs.com/documentation/#taking-it-further
+    actions: function (data) {
+      var actions = [];
+
+      // file name case refer to https://plopjs.com/documentation/#case-modifiers
+      if (data.type === "page") {
+        actions.push({
+          type: "addMany",
+          destination: "{{path}}/{{name}}",
+          base: "src/examples/{{type}}",
+          templateFiles: "src/examples/{{type}}/**",
+          stripExtensions: ["hbs"],
+        });
+      }
+
+      return actions;
+    },
   });
 }
