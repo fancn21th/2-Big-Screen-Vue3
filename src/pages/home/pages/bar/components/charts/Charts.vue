@@ -71,13 +71,18 @@ const resizable = true;
   height: 100%;
   /* avoid overlapping with header */
   padding-top: 100px;
+  pointer-events: none;
 }
 
 .vue-grid-layout {
 }
 
+.vue-grid-item {
+  pointer-events: all;
+}
+
 .vue-grid-item:not(.vue-grid-placeholder) {
-  border: 1px dashed #ccc;
+  /* border: 1px dashed #ccc; */
 }
 
 .vue-grid-item .resizing {

@@ -59,6 +59,10 @@ const change = (e) => {
   border: 1px dashed #ccc;
   background-color: #eee;
 }
+.header,
+.nav {
+  pointer-events: all;
+}
 .header {
   width: 500px;
   height: 100px;
@@ -76,5 +80,6 @@ const change = (e) => {
   height: 100%;
   display: flex;
   flex-direction: column;
+  pointer-events: none;
 }
 </style>

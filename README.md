@@ -8,6 +8,25 @@
 
   - e.g. `src/components/Nav.vue` is used in `src/App.vue`, so `Nav.vue` is placed in `src/components` folder
 
+## Rules
+
+### Common
+
+- self-governing
+
+  - this is the NO.1 rule overall
+
+    each component should be self-governing, which means it should be able to work independently without any other components
+
+    - fetch data by itself
+    - apply the global theme by itself
+    - get the global config by itself
+    - get the global state by itself
+
+### Echart Components
+
+### Vue Components
+
 ## Features
 
 - Layering
@@ -51,4 +70,9 @@
 
 ## Potential Issues
 
-- [pointer-events](https://developer.mozilla.org/en-US/docs/Web/CSS/pointer-events) due to layer overlapping
+- Pointer Events Lost due to Overlapping
+
+  to fix this issue some css properties need to be used with combination
+
+  - the `visibility` property
+  - [pointer-events](https://developer.mozilla.org/en-US/docs/Web/CSS/pointer-events)
