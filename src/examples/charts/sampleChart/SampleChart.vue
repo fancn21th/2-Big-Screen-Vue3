@@ -1,11 +1,11 @@
 <script setup>
 import * as echarts from "echarts";
-import { ref, watch, onMounted } from "vue";
-import useGlobalStagger from "../../composables/useGlobalStagger";
+import { shallowRef, watch, onMounted } from "vue";
+import useGlobalStagger from "@/composables/useGlobalStagger";
 
 const { register } = useGlobalStagger();
 
-const chartRef = ref(null);
+const chartRef = shallowRef(null);
 
 const renderChart = () => {
   const chart = echarts.init(chartRef.value);

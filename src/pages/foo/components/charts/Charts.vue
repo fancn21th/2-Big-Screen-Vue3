@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import { GridLayout, GridItem } from "vue3-grid-layout-next";
 import { config } from "../../../../configs/chartsConfig";
-const { colsNumber, rowHeight } = config;
+const { colsNumber, getRowHeight } = config;
 import NightingaleChart from "../../../../components/nightingaleChart/NightingaleChart.vue";
 
 const initial_layout = Array.from({ length: 32 }, (_, index) => {
@@ -20,6 +20,9 @@ const layout = ref(initial_layout.filter((item) => item.x > 4));
 
 const draggable = true;
 const resizable = true;
+
+// calculation for grid layout height by depending on the height of window
+const rowHeight = getRowHeight();
 </script>
 
 <template>

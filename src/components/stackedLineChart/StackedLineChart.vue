@@ -1,12 +1,21 @@
 <script setup>
 import * as echarts from "echarts";
-import { ref, watch, onMounted } from "vue";
+import { shallowRef, watch, onMounted } from "vue";
 import useGlobalStagger from "../../composables/useGlobalStagger";
+import { useStackLineChartData } from "./useStackLineChartData";
+/**
+ *  A TodoList for a single chart component
+ *
+ *    0. render the chart so to say
+ *    1. register the dom that needs to be animated
+ *    2. fetch the data from the service
+ */
 
 const { register } = useGlobalStagger();
 
-const chartRef = ref(null);
+const chartRef = shallowRef(null);
 
+// render chart
 const renderChart = () => {
   const chart = echarts.init(chartRef.value);
 
@@ -76,6 +85,7 @@ const renderChart = () => {
   chart.setOption(option);
 };
 
+// animation registry
 onMounted(() => {
   // register the dom that needs to be animated
   register(chartRef, "chart", {
@@ -89,6 +99,7 @@ onMounted(() => {
   });
 });
 
+// render chart
 watch(chartRef, (newVal, oldVal) => {
   if (newVal && newVal.clientHeight > 0) {
     setTimeout(() => {
@@ -96,6 +107,9 @@ watch(chartRef, (newVal, oldVal) => {
     }, 0);
   }
 });
+
+// Fetch Data
+const { isLoading, isError, isFetching, data, error } = useStackLineChartData();
 </script>
 
 <template>
@@ -106,5 +120,7 @@ watch(chartRef, (newVal, oldVal) => {
 .chart-container {
   width: 100%;
   height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 3px;
 }
 </style>

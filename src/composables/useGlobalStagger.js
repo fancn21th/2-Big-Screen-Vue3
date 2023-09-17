@@ -33,7 +33,7 @@ const animate = () => {
   Object.keys(elements).map((key) => {
     const { doms, option } = elements[key];
     const timeline = gsap.timeline({});
-    timeline.from(doms, option, "-=50%");
+    timeline.from(doms, option);
     master.add(timeline);
   });
 };
