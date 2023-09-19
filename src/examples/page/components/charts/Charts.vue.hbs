@@ -2,9 +2,11 @@
 import { ref } from "vue";
 import { vElementSize } from "@vueuse/components";
 import { GridLayout, GridItem } from "vue3-grid-layout-next";
-import { config } from "@/configs/chartsConfig";
-const { colsNumber, getRowHeight } = config;
+import config  from "@/configs/chartsConfig";
+
 import StackedLineChart from "@/components/stackedLineChart/StackedLineChart.vue";
+
+const { colsNumber, getRowHeight } = config
 
 // calculation for grid layout height by depending on the height of the container
 // the height of the grid layout is determined by rowHeight

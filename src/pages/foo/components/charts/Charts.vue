@@ -1,9 +1,10 @@
 <script setup>
 import { ref } from "vue";
 import { GridLayout, GridItem } from "vue3-grid-layout-next";
-import { config } from "../../../../configs/chartsConfig";
+import config from "@/configs/chartsConfig";
+import NightingaleChart from "@/components/nightingaleChart/NightingaleChart.vue";
+
 const { colsNumber, getRowHeight } = config;
-import NightingaleChart from "../../../../components/nightingaleChart/NightingaleChart.vue";
 
 const initial_layout = Array.from({ length: 32 }, (_, index) => {
   return {

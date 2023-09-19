@@ -3,15 +3,6 @@ defineProps({
   index: Number,
   backgroundColor: { type: String, default: "transparent" },
   fullscreen: { type: Boolean, default: true },
-  // trim: {
-  //   type: Object,
-  //   default: {
-  //     top: 0,
-  //     right: 0,
-  //     bottom: 0,
-  //     left: 0,
-  //   },
-  // },
 });
 </script>
 
@@ -21,12 +12,6 @@ defineProps({
       class="layer"
       :style="{
         zIndex: index,
-
-        // marginTop: trim.top,
-        // marginRight: trim.right,
-        // marginBottom: trim.bottom,
-        // marginLeft: trim.left,
-        // backgroundColor: backgroundColor,
       }"
       :class="{ fullscreen: fullscreen }"
     >
