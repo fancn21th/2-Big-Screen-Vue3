@@ -1,8 +1,9 @@
 import { createRouter, createWebHashHistory } from "vue-router";
 import BasicLayout from "../layouts/basicLayout/BasicLayout.vue";
-import Home from "@/pages/home/Home.vue";
-import Foo from "@/pages/foo/Foo.vue";
-import Bar from "@/pages/home/pages/bar/Bar.vue";
+
+const Home = () => import("@/pages/home/Home.vue");
+const Foo = () => import("@/pages/foo/Foo.vue");
+const Bar = () => import("@/pages/home/pages/bar/Bar.vue");
 
 const routes = [
   { path: "/", redirect: { name: "nav" } },
