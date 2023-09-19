@@ -5,6 +5,7 @@ import { GridLayout, GridItem } from "vue3-grid-layout-next";
 import { config } from "@/configs/chartsConfig";
 const { colsNumber, getRowHeight } = config;
 import StackedLineChart from "@/components/stackedLineChart/StackedLineChart.vue";
+import ChartFoo from "../chartFoo/ChartFoo.vue";
 
 // calculation for grid layout height by depending on the height of the container
 // the height of the grid layout is determined by rowHeight
@@ -26,6 +27,7 @@ const initial_layout = Array.from({ length: 32 }, (_, index) => {
     h: 1,
     i: index.toString(),
     static: false,
+    component: ChartFoo,
   };
 });
 
@@ -37,7 +39,7 @@ const resizable = true;
 
 <template>
   <!-- this container is given for calculation of height of the grid layout -->
-  <div class="container" v-element-size="onResize">
+  <div class="charts-container" v-element-size="onResize">
     <!-- only if rowHeight is greater than 0 -->
     <GridLayout
       v-if="rowHeight > 0"
@@ -59,14 +61,14 @@ const resizable = true;
         :h="item.h"
         :i="item.i"
       >
-        <StackedLineChart />
+        <component :is="item.component"></component>
       </GridItem>
     </GridLayout>
   </div>
 </template>
 
 <style scoped>
-.container {
+.charts-container {
   width: 100%;
   height: 100%;
   /* avoid overlapping with header */
@@ -79,6 +81,7 @@ const resizable = true;
 
 .vue-grid-item {
   pointer-events: all;
+  border: 1px dashed red;
 }
 
 .vue-grid-item:not(.vue-grid-placeholder) {
