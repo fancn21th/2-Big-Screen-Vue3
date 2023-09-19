@@ -20,6 +20,6 @@ import Nav from "./components/nav/Nav.vue";
 .background {
   width: 100%;
   height: 100%;
-  background: #efefef url("../../assets/bg-2.jpg");
+  background: #efefef url("../../assets/bg-3.png");
 }
 </style>
