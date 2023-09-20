@@ -25,23 +25,45 @@
 
 ### Components Hierarchy / Folder Structure
 
-- 一级路由组件 (只有路由没有实体组件)
-  - 二级路由组件 (在 pages 下面 )
-    - 地图组件
-    - 三级路由组件 (在 子 pages 下面 )
-      - Grid Layout 组件 (Charts)
-      - 业务组件 ( > 1 个)
-        - 渲染组件
-          - Echart 类型 (引用 1\*)
-          - Vue 类型 (引用 2\*)
-- 全局组件 (components)
-  - Echart 类型 (定义 1\*)
-  - Vue 类型 (定义 2\*)
+- Page 组件
 
-### 组件
+  <span style="background-color: yellow; color:red; margin: 10px;">
+  以下目录结构是针对3级路由设计!
+  </span>
 
-- 文件夹 小写
-  - 组件 与文件夹同名 首字母大写
+  - 一级路由组件 (只有路由没有实体组件)
+    - 二级路由组件 (在 pages 下面 )
+      - 地图组件
+      - 三级路由组件 (在 子 pages 下面 )
+        - Grid Layout 组件 (Charts)
+        - 业务组件 ( > 1 个)
+          - 渲染组件
+            - Echart 类型 (引用 1\*)
+            - Vue 类型 (引用 2\*)
+  - 全局组件 (components)
+
+    - Echart 类型 (定义 1\*)
+    - Vue 类型 (定义 2\*)
+
+- Chart 组件
+
+  <span style="background-color: yellow; color:red; margin: 10px;">
+  Chart 组件是指的 Grid Layout 里面的 图表组件 它是一个 Stateful 组件
+  </span>
+
+### 组件命名
+
+```cli
+.
+├── Foo.vue             // 与文件夹名称一致
+└── components          // Foo 中使用的子组件
+    ├── charts          // 组件放在文件夹, 名称小写
+    │   └── Charts.vue
+    └── map             // 组件放在文件夹, 名称小写
+        ├── Map.vue
+        └── data.js     // 依赖文件就近存储
+
+```
 
 ### Echart Components
 

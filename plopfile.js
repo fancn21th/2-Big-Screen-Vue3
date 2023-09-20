@@ -12,12 +12,17 @@ export default function (plop) {
         type: "list",
         name: "type",
         message: "组件类型",
-        choices: ["page", "echart", "vue"],
+        choices: ["page", "chart"],
       },
       {
         type: "input",
         name: "name",
         message: "组件名称",
+      },
+      {
+        type: "input",
+        name: "name2",
+        message: "子组件名称(三级路由存在时)",
       },
       {
         type: "fuzzypath",
@@ -37,7 +42,15 @@ export default function (plop) {
       if (data.type === "page") {
         actions.push({
           type: "addMany",
-          destination: "{{path}}/{{name}}",
+          destination: "{{path}}/{{lowerCase name}}",
+          base: "src/examples/{{type}}",
+          templateFiles: "src/examples/{{type}}/**",
+          stripExtensions: ["hbs"],
+        });
+      } else if (data.type === "chart") {
+        actions.push({
+          type: "addMany",
+          destination: "{{path}}/{{lowerCase name}}",
           base: "src/examples/{{type}}",
           templateFiles: "src/examples/{{type}}/**",
           stripExtensions: ["hbs"],
