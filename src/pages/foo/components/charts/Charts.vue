@@ -1,8 +1,8 @@
 <script setup>
-import { ref } from "vue";
-import { GridLayout, GridItem } from "vue3-grid-layout-next";
-import config from "@/configs/chartsConfig";
-import NightingaleChart from "@/components/nightingaleChart/NightingaleChart.vue";
+import { ref } from 'vue';
+import { GridLayout, GridItem } from 'vue3-grid-layout-next';
+import config from '@/configs/chartsConfig';
+import NightingaleChart from '@/components/nightingaleChart/NightingaleChart.vue';
 
 const { colsNumber, getRowHeight } = config;
 
@@ -52,7 +52,23 @@ const rowHeight = getRowHeight();
 </template>
 
 <style scoped>
+.charts-container {
+  width: 100%;
+  height: 100%;
+  padding-top: 100px;
+  /* fix overlapping issue */
+  pointer-events: none;
+}
+
 .vue-grid-layout {
+}
+
+.vue-grid-item {
+  /* fix overlapping issue */
+  pointer-events: all;
+  transition: none;
+  /* TODO: 调试边框 */
+  border: 1px dashed red;
 }
 
 .vue-grid-item:not(.vue-grid-placeholder) {

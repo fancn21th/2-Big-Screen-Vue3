@@ -1,7 +1,7 @@
 <script setup>
 defineProps({
   index: Number,
-  backgroundColor: { type: String, default: "transparent" },
+  backgroundColor: { type: String, default: 'transparent' },
   fullscreen: { type: Boolean, default: true },
 });
 </script>
@@ -33,10 +33,12 @@ defineProps({
   top: 0;
   left: 0;
   background-color: transparent;
-  overflow: hidden; /* prevent child from overflowing */
+  overflow: hidden;
+  /* fix overlapping issue */
   visibility: hidden;
 }
 .layer * {
+  /* fix overlapping issue */
   visibility: visible;
 }
 </style>

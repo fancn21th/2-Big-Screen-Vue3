@@ -1,10 +1,10 @@
 <script setup>
-import { ref } from "vue";
-import { vElementSize } from "@vueuse/components";
-import { GridLayout, GridItem } from "vue3-grid-layout-next";
-import config from "@/configs/chartsConfig";
-import StackedLineChart from "@/components/stackedLineChart/StackedLineChart.vue";
-import ChartFoo from "../chartFoo/ChartFoo.vue";
+import { ref } from 'vue';
+import { vElementSize } from '@vueuse/components';
+import { GridLayout, GridItem } from 'vue3-grid-layout-next';
+import config from '@/configs/chartsConfig';
+import StackedLineChart from '@/components/stackedLineChart/StackedLineChart.vue';
+import ChartFoo from '../chartFoo/ChartFoo.vue';
 
 const { colsNumber, getRowHeight } = config;
 
@@ -14,7 +14,7 @@ const rowHeight = ref(0);
 
 function onResize({ width, height }) {
   if (height > 0) {
-    console.log("onResize", width, height);
+    console.log('onResize', width, height);
     rowHeight.value = getRowHeight(height);
   }
 }
@@ -72,8 +72,8 @@ const resizable = true;
 .charts-container {
   width: 100%;
   height: 100%;
-  /* avoid overlapping with header */
   padding-top: 100px;
+  /* fix overlapping issue */
   pointer-events: none;
 }
 
@@ -81,7 +81,10 @@ const resizable = true;
 }
 
 .vue-grid-item {
+  /* fix overlapping issue */
   pointer-events: all;
+  transition: none;
+  /* TODO: 调试边框 */
   border: 1px dashed red;
 }
 
