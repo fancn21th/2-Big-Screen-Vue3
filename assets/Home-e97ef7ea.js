@@ -1,0 +1,1 @@
+import{o as r,c as t,r as c,w as n,L as p,a as e}from"./index-bff03152.js";import{M as m}from"./UsaMap-623fd3a3.js";import"./useGlobalStagger-2df6c203.js";const u={__name:"Map",setup(o){return(a,_)=>(r(),t(m))}},x={__name:"Home",setup(o){return(a,_)=>{const s=c("router-view");return r(),t(p,{index:10},{default:n(()=>[e(u),e(s)]),_:1})}}};export{x as default};
