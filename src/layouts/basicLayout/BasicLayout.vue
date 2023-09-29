@@ -1,6 +1,6 @@
 <script setup>
-import Layer from "@/components/layer/Layer.vue";
-import Nav from "./components/nav/Nav.vue";
+import Layer from '@/components/layer/Layer.vue';
+import Nav from './components/nav/Nav.vue';
 </script>
 
 <template>
@@ -14,12 +14,23 @@ import Nav from "./components/nav/Nav.vue";
     <!-- background layer -->
     <div class="background"></div>
   </Layer>
+  <Layer :index="10000">
+    <div id="configurator" class="configurator"></div>
+  </Layer>
 </template>
 
 <style scoped>
 .background {
   width: 100%;
   height: 100%;
-  background: #efefef url("../../assets/bg-3.png");
+  background: #efefef url('@/assets/bg-3.png');
+}
+.configurator {
+  width: 100%;
+  height: 100%;
+  visibility: hidden;
+}
+.configurator * {
+  visibility: visible;
 }
 </style>

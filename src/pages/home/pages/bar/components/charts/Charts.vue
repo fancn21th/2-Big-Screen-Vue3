@@ -12,6 +12,10 @@ const initial_layout = Array.from({ length: 32 }, (_, index) => {
     i: index.toString(),
     static: false,
     component: ChartFoo,
+    meta: {
+      key: `chart-${index}`,
+      description: 'Chart Foo description',
+    },
   };
 });
 

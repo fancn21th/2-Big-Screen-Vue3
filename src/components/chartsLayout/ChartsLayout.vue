@@ -10,6 +10,7 @@ import { ref, shallowRef } from 'vue';
 import { vElementSize } from '@vueuse/components';
 import { GridLayout, GridItem } from 'vue3-grid-layout-next';
 import config from '@/configs/chartsConfig';
+import ChartConfiguratorWrapper from '@/components/chartConfigurator/ChartConfiguratorWrapper.vue';
 
 const { colsNumber, getRowHeight } = config;
 
@@ -54,7 +55,9 @@ const resizable = true;
         :h="item.h"
         :i="item.i"
       >
-        <component :is="item.component"></component>
+        <ChartConfiguratorWrapper :meta="item.meta">
+          <component :is="item.component"></component>
+        </ChartConfiguratorWrapper>
       </GridItem>
     </GridLayout>
   </div>
