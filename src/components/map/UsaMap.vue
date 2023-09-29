@@ -13,9 +13,10 @@ const chartRef = shallowRef(null);
 const renderChart = async () => {
   const chart = echarts.init(chartRef.value);
 
-  chart.showLoading();
+  // chart.showLoading();
 
-  chart.hideLoading();
+  // chart.hideLoading();
+
   echarts.registerMap('USA', data, {
     Alaska: {
       left: -131,
