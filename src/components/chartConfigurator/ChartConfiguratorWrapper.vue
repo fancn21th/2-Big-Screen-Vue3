@@ -113,7 +113,6 @@ onUnmounted(() => {
         <div class="panel">
           <button @click="test">测试</button>
         </div>
-        <pre>{{ errors }}</pre>
       </form>
     </div>
   </Teleport>
