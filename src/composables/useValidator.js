@@ -1,4 +1,4 @@
-import { ref, computed } from 'vue';
+import { ref, computed, watch } from 'vue';
 
 export const useValidator = (schema = {}, initial = {}) => {
   const fields = ref(
@@ -13,6 +13,15 @@ export const useValidator = (schema = {}, initial = {}) => {
       };
       return acc;
     }, {}),
+  );
+
+  // TODO: this got be a huge performance hit
+  watch(
+    () => fields,
+    (newValue, oldValue) => {
+      validate();
+    },
+    { deep: true },
   );
 
   const valid = computed(() => {

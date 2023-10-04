@@ -69,7 +69,7 @@ const close = () => {
 
 const test = () => {
   validate();
-  if (valid) {
+  if (valid.value) {
     console.log('valid');
   }
 };
