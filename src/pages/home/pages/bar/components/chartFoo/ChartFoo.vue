@@ -1,7 +1,8 @@
 <script setup>
-import useGlobalStagger from "@/composables/useGlobalStagger";
-import { ref, watch, onMounted } from "vue";
-import Battery from "@/components/battery/Battery.vue";
+import useGlobalStagger from '@/composables/useGlobalStagger';
+import ChartConfiguratorWrapper from '@/components/chartConfigurator/ChartConfiguratorWrapper.vue';
+import { ref, onMounted } from 'vue';
+import Battery from '@/components/battery/Battery.vue';
 
 const { register } = useGlobalStagger();
 
@@ -10,13 +11,13 @@ const chartRef = ref(null);
 // animation registry
 onMounted(() => {
   // register the dom that needs to be animated
-  register(chartRef, "chart", {
-    x: "400%",
+  register(chartRef, 'chart', {
+    x: '400%',
     stagger: {
       grid: [4, 3],
-      from: "random",
+      from: 'random',
       amount: 1,
-      ease: "ease.inOut",
+      ease: 'ease.inOut',
     },
   });
 });
@@ -24,8 +25,14 @@ onMounted(() => {
 
 <template>
   <div class="chartfoo-container" ref="chartRef">
-    <Battery />
-    <Battery />
+    <ChartConfiguratorWrapper
+      :meta="{
+        key: '123',
+      }"
+    >
+      <Battery />
+      <Battery />
+    </ChartConfiguratorWrapper>
   </div>
 </template>
 
