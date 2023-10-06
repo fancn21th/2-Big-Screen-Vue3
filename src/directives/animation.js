@@ -1,6 +1,6 @@
 import useGlobalStagger from '@/composables/useGlobalStagger';
 
-const { register } = useGlobalStagger();
+const { register, unregister } = useGlobalStagger();
 
 export const animationDirective = {
   // // 在绑定元素的 attribute 前
@@ -10,8 +10,9 @@ export const animationDirective = {
   // },
   // // 在元素被插入到 DOM 前调用
   // beforeMount(el, binding, vnode, prevVnode) {},
-  // // 在绑定元素的父组件
-  // // 及他自己的所有子节点都挂载完成后调用
+
+  // 在绑定元素的父组件
+  // 及他自己的所有子节点都挂载完成后调用
   mounted(el, binding, vnode, prevVnode) {
     register(el, binding.value.group, binding.value.options);
   },
@@ -22,6 +23,9 @@ export const animationDirective = {
   // updated(el, binding, vnode, prevVnode) {},
   // // 绑定元素的父组件卸载前调用
   // beforeUnmount(el, binding, vnode, prevVnode) {},
-  // // 绑定元素的父组件卸载后调用
-  // unmounted(el, binding, vnode, prevVnode) {},
+
+  // 绑定元素的父组件卸载后调用
+  unmounted(el, binding, vnode, prevVnode) {
+    unregister(el, binding.value.group);
+  },
 };

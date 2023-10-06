@@ -17,16 +17,21 @@ import cloneDeep from 'lodash/cloneDeep';
  */
 class Stagger {
   constructor() {
+    this.init();
+  }
+
+  init() {
+    this.master = gsap.timeline();
     this.registeredGroups = {};
     this.registeredAnimations = {};
-    this.run = useDebounceFn(this.animate, 100);
-    this.master = gsap.timeline();
+    this.isAnimationStarted = false;
   }
 
   debug(stageName) {
     const info = cloneDeep({
       registeredGroups: this.registeredGroups,
       registeredAnimations: this.registeredAnimations,
+      isAnimationStarted: this.isAnimationStarted,
     });
     console.log(stageName, info);
   }
@@ -51,8 +56,15 @@ class Stagger {
     this.debug('注册后');
   }
 
-  unregister(groupName) {
-    this.removeAnimation(groupName);
+  unregister(dom, groupName) {
+    this.debug('注销前');
+    // 避免重复注销
+    if (this.registeredGroups[groupName]) {
+      this.removeAnimation(groupName);
+      delete this.registeredGroups[groupName];
+      delete this.registeredAnimations[groupName];
+    }
+    this.debug('注销后');
   }
 
   addAnimation(groupName) {
@@ -63,8 +75,14 @@ class Stagger {
     this.master.remove(this.registeredAnimations[groupName]);
   }
 
+  reset() {
+    this.isAnimationStarted = false;
+  }
+
   animate() {
     this.debug('执行前');
+
+    this.isAnimationStarted = true;
 
     Object.keys(this.registeredGroups).map((key) => {
       const { doms, option } = this.registeredGroups[key];
@@ -74,6 +92,8 @@ class Stagger {
       this.addAnimation(key);
     });
 
+    this.reset();
+
     this.debug('执行后');
   }
 
@@ -82,6 +102,7 @@ class Stagger {
       try {
         this.master.reverse();
         this.master.eventCallback('onReverseComplete', () => {
+          this.init();
           resolve(true);
         });
       } catch (error) {
@@ -90,8 +111,20 @@ class Stagger {
     });
   }
 
+  ready() {
+    return Object.keys(this.registeredGroups).length === 2;
+  }
+
   run() {
-    this.run();
+    if (this.isAnimationStarted) {
+      throw new Error('animation is already started');
+    }
+    const interval = setInterval(() => {
+      if (this.ready()) {
+        this.animate();
+        clearInterval(interval);
+      }
+    }, 100);
   }
 
   undo() {
@@ -104,6 +137,7 @@ const stagger = new Stagger();
 export default function useGlobalStagger(element, options) {
   return {
     register: (dom, groupName, option) => stagger.register(dom, groupName, option),
+    unregister: (dom, groupName) => stagger.unregister(dom, groupName),
     run: () => stagger.run(),
     undo: () => stagger.undo(),
   };

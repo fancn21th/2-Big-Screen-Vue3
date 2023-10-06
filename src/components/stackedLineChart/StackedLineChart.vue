@@ -89,22 +89,7 @@ const { isLoading, isError, isFetching, data, error } = useStackLineChartData();
 </script>
 
 <template>
-  <div
-    class="chart-container"
-    ref="chartRef"
-    v-stagger="{
-      group: 'chart',
-      options: {
-        x: '400%',
-        stagger: {
-          grid: [4, 3],
-          from: 'random',
-          amount: 1,
-          ease: 'ease.inOut',
-        },
-      },
-    }"
-  ></div>
+  <div class="chart-container" ref="chartRef"></div>
 </template>
 
 <style scoped>

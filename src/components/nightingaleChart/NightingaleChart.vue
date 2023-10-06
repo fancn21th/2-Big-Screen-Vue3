@@ -62,7 +62,7 @@ watch(chartRef, (newVal, oldVal) => {
     class="chart-container"
     ref="chartRef"
     v-stagger="{
-      group: 'chart',
+      group: 'chart2',
       options: {
         x: '400%',
         stagger: {
