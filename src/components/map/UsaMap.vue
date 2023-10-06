@@ -1,12 +1,8 @@
 <script setup>
 import * as echarts from 'echarts';
-import { shallowRef, watch, onMounted } from 'vue';
+import { shallowRef, watch } from 'vue';
 import 'echarts/extension/bmap/bmap';
 import data from './data';
-
-import useGlobalStagger from '@/composables/useGlobalStagger';
-
-const { register } = useGlobalStagger();
 
 const chartRef = shallowRef(null);
 
@@ -150,15 +146,6 @@ const renderChart = async () => {
   chart.setOption(option);
 };
 
-onMounted(() => {
-  // register the dom that needs to be animated
-  register(chartRef, 'map', {
-    opacity: 0,
-    duration: 1,
-    ease: 'ease.inOut',
-  });
-});
-
 watch(chartRef, (newVal, oldVal) => {
   if (newVal && newVal.clientHeight > 0) {
     setTimeout(() => {
@@ -169,7 +156,18 @@ watch(chartRef, (newVal, oldVal) => {
 </script>
 
 <template>
-  <div class="chart-container" ref="chartRef"></div>
+  <div
+    class="chart-container"
+    ref="chartRef"
+    v-stagger="{
+      group: 'map',
+      options: {
+        opacity: 0,
+        duration: 1,
+        ease: 'ease.inOut',
+      },
+    }"
+  ></div>
 </template>
 
 <style scoped>

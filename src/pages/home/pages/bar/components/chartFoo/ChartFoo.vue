@@ -1,34 +1,13 @@
 <script setup>
-// import useGlobalStagger from '@/composables/useGlobalStagger';
 import ChartConfiguratorWrapper from '@/components/chartConfigurator/ChartConfiguratorWrapper.vue';
-import { ref } from 'vue';
 import Battery from '@/components/battery/Battery.vue';
-
-// const { register } = useGlobalStagger();
-
-const chartRef = ref(null);
-
-// animation registry
-// onMounted(() => {
-//   // register the dom that needs to be animated
-//   register(chartRef, 'chart', {
-//     x: '400%',
-//     stagger: {
-//       grid: [4, 3],
-//       from: 'random',
-//       amount: 1,
-//       ease: 'ease.inOut',
-//     },
-//   });
-// });
 </script>
 
 <template>
   <div
     class="chartfoo-container"
-    ref="chartRef"
     v-stagger="{
-      stagger: 'chart',
+      group: 'chart',
       options: {
         x: '400%',
         stagger: {

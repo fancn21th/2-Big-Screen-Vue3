@@ -1,17 +1,7 @@
 <script setup>
-import * as echarts from "echarts";
-import { shallowRef, watch, onMounted } from "vue";
-import useGlobalStagger from "@/composables/useGlobalStagger";
-import { useStackLineChartData } from "./useStackLineChartData";
-/**
- *  A TodoList for a single chart component
- *
- *    0. render the chart so to say
- *    1. register the dom that needs to be animated
- *    2. fetch the data from the service
- */
-
-const { register } = useGlobalStagger();
+import * as echarts from 'echarts';
+import { shallowRef, watch } from 'vue';
+import { useStackLineChartData } from './useStackLineChartData';
 
 const chartRef = shallowRef(null);
 
@@ -21,18 +11,18 @@ const renderChart = () => {
 
   const option = {
     title: {
-      text: "Stacked Line",
+      text: 'Stacked Line',
     },
     tooltip: {
-      trigger: "axis",
+      trigger: 'axis',
     },
     legend: {
-      data: ["Email", "Union Ads", "Video Ads", "Direct", "Search Engine"],
+      data: ['Email', 'Union Ads', 'Video Ads', 'Direct', 'Search Engine'],
     },
     grid: {
-      left: "3%",
-      right: "4%",
-      bottom: "3%",
+      left: '3%',
+      right: '4%',
+      bottom: '3%',
       containLabel: true,
     },
     toolbox: {
@@ -41,42 +31,42 @@ const renderChart = () => {
       },
     },
     xAxis: {
-      type: "category",
+      type: 'category',
       boundaryGap: false,
-      data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"],
+      data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
     },
     yAxis: {
-      type: "value",
+      type: 'value',
     },
     series: [
       {
-        name: "Email",
-        type: "line",
-        stack: "Total",
+        name: 'Email',
+        type: 'line',
+        stack: 'Total',
         data: [120, 132, 101, 134, 90, 230, 210],
       },
       {
-        name: "Union Ads",
-        type: "line",
-        stack: "Total",
+        name: 'Union Ads',
+        type: 'line',
+        stack: 'Total',
         data: [220, 182, 191, 234, 290, 330, 310],
       },
       {
-        name: "Video Ads",
-        type: "line",
-        stack: "Total",
+        name: 'Video Ads',
+        type: 'line',
+        stack: 'Total',
         data: [150, 232, 201, 154, 190, 330, 410],
       },
       {
-        name: "Direct",
-        type: "line",
-        stack: "Total",
+        name: 'Direct',
+        type: 'line',
+        stack: 'Total',
         data: [320, 332, 301, 334, 390, 330, 320],
       },
       {
-        name: "Search Engine",
-        type: "line",
-        stack: "Total",
+        name: 'Search Engine',
+        type: 'line',
+        stack: 'Total',
         data: [820, 932, 901, 934, 1290, 1330, 1320],
       },
     ],
@@ -84,20 +74,6 @@ const renderChart = () => {
 
   chart.setOption(option);
 };
-
-// animation registry
-onMounted(() => {
-  // register the dom that needs to be animated
-  register(chartRef, "chart", {
-    x: "400%",
-    stagger: {
-      grid: [4, 3],
-      from: "random",
-      amount: 1,
-      ease: "ease.inOut",
-    },
-  });
-});
 
 // render chart
 watch(chartRef, (newVal, oldVal) => {
@@ -113,7 +89,22 @@ const { isLoading, isError, isFetching, data, error } = useStackLineChartData();
 </script>
 
 <template>
-  <div class="chart-container" ref="chartRef"></div>
+  <div
+    class="chart-container"
+    ref="chartRef"
+    v-stagger="{
+      group: 'chart',
+      options: {
+        x: '400%',
+        stagger: {
+          grid: [4, 3],
+          from: 'random',
+          amount: 1,
+          ease: 'ease.inOut',
+        },
+      },
+    }"
+  ></div>
 </template>
 
 <style scoped>
