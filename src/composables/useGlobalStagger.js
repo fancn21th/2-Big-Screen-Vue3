@@ -1,6 +1,7 @@
 import gsap from 'gsap';
 import { unref } from 'vue';
 import { useDebounceFn } from '@vueuse/core';
+import cloneDeep from 'lodash/cloneDeep';
 
 /**
  *  stages for animation
@@ -22,8 +23,18 @@ class Stagger {
     this.master = gsap.timeline();
   }
 
+  debug(stageName) {
+    const info = cloneDeep({
+      registeredGroups: this.registeredGroups,
+      registeredAnimations: this.registeredAnimations,
+    });
+    console.log(stageName, info);
+  }
+
   register(dom, groupName, option) {
     const domElement = unref(dom);
+
+    this.debug('注册前');
 
     if (this.registeredGroups[groupName]) {
       this.registeredGroups[groupName] = {
@@ -36,23 +47,37 @@ class Stagger {
         doms: [domElement],
       };
     }
+
+    this.debug('注册后');
+  }
+
+  unregister(groupName) {
+    this.removeAnimation(groupName);
+  }
+
+  addAnimation(groupName) {
+    this.master.add(this.registeredAnimations[groupName]);
+  }
+
+  removeAnimation(groupName) {
+    this.master.remove(this.registeredAnimations[groupName]);
   }
 
   animate() {
+    this.debug('执行前');
+
     Object.keys(this.registeredGroups).map((key) => {
       const { doms, option } = this.registeredGroups[key];
       const timeline = gsap.timeline({});
       timeline.from(doms, option);
       this.registeredAnimations[key] = timeline;
-      this.master.add(this.registeredAnimations[key]);
+      this.addAnimation(key);
     });
+
+    this.debug('执行后');
   }
 
-  run() {
-    this.run();
-  }
-
-  undo() {
+  unanimate() {
     return new Promise((resolve, reject) => {
       try {
         this.master.reverse();
@@ -63,6 +88,14 @@ class Stagger {
         reject(error);
       }
     });
+  }
+
+  run() {
+    this.run();
+  }
+
+  undo() {
+    return this.unanimate();
   }
 }
 
