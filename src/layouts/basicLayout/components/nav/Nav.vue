@@ -1,8 +1,8 @@
 <script setup>
-import gsap from "gsap";
-import { ref, onMounted } from "vue";
-import { storeToRefs } from "pinia";
-import { useFilterStore } from "@/stores/filter";
+import gsap from 'gsap';
+import { ref, onMounted } from 'vue';
+import { storeToRefs } from 'pinia';
+import { useFilterStore } from '@/stores/filter';
 
 const header = ref(null);
 const nav = ref(null);
@@ -16,11 +16,11 @@ onMounted(() => {
   timeline
     .from(header.value, {
       x: -500,
-      ease: "ease.inOut",
+      ease: 'ease.inOut',
     })
     .from(nav.value, {
       x: -100,
-      ease: "ease.inOut",
+      ease: 'ease.inOut',
     });
 });
 
@@ -45,7 +45,8 @@ const change = (e) => {
     </div>
     <div class="nav bg" ref="nav">
       <ul>
-        <li><router-link to="/">Home Page</router-link></li>
+        <li><router-link to="/">Bar Page</router-link></li>
+        <li><router-link to="/nav/home/baz">Baz Page</router-link></li>
         <li>
           <router-link to="/nav/foo">Foo Page</router-link>
         </li>

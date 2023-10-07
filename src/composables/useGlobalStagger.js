@@ -39,8 +39,6 @@ class Stagger {
   register(dom, groupName, option) {
     const domElement = unref(dom);
 
-    this.debug('注册前');
-
     if (this.registeredGroups[groupName]) {
       this.registeredGroups[groupName] = {
         ...this.registeredGroups[groupName],
@@ -52,19 +50,17 @@ class Stagger {
         doms: [domElement],
       };
     }
-
-    this.debug('注册后');
   }
 
   unregister(dom, groupName) {
-    this.debug('注销前');
+    this.debug('before unregister');
     // 避免重复注销
     if (this.registeredGroups[groupName]) {
       this.removeAnimation(groupName);
       delete this.registeredGroups[groupName];
       delete this.registeredAnimations[groupName];
     }
-    this.debug('注销后');
+    this.debug('after unregister');
   }
 
   addAnimation(groupName) {
@@ -76,11 +72,13 @@ class Stagger {
   }
 
   reset() {
+    this.master = gsap.timeline();
+    this.registeredAnimations = {};
     this.isAnimationStarted = false;
   }
 
   animate() {
-    this.debug('执行前');
+    this.debug('before animate');
 
     this.isAnimationStarted = true;
 
@@ -92,17 +90,20 @@ class Stagger {
       this.addAnimation(key);
     });
 
-    this.reset();
+    this.isAnimationStarted = false;
 
-    this.debug('执行后');
+    this.debug('after animate');
   }
 
   unanimate() {
+    this.debug('before unanimate');
+
     return new Promise((resolve, reject) => {
       try {
         this.master.reverse();
         this.master.eventCallback('onReverseComplete', () => {
-          this.init();
+          this.reset();
+          this.debug('after unanimate');
           resolve(true);
         });
       } catch (error) {
